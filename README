@@ -1,0 +1,51 @@
+Log-Any-Adapter-Term
+
+Adapter for Log::Any that logs to the terminal. Includes color output for
+interactive terminals.
+
+
+INSTALLATION
+
+To install from CPAN:
+
+   sudo cpan Log::Any::Adapter::Term
+
+To install this module, run the following commands:
+
+	perl Build.PL
+	./Build
+	./Build test
+	./Build install
+
+SUPPORT AND DOCUMENTATION
+
+After installing, you can find documentation for this module with the
+perldoc command.
+
+    perldoc Log::Any::Adapter::Term
+
+You can also look for information at:
+
+    RT, CPAN's request tracker
+        http://rt.cpan.org/NoAuth/Bugs.html?Dist=Log-Any-Adapter-Term
+
+    AnnoCPAN, Annotated CPAN documentation
+        http://annocpan.org/dist/Log-Any-Adapter-Term
+
+    CPAN Ratings
+        http://cpanratings.perl.org/d/Log-Any-Adapter-Term
+
+    Search CPAN
+        http://search.cpan.org/dist/Log-Any-Adapter-Term/
+
+
+COPYRIGHT AND LICENCE
+
+Copyright (C) 2010 Mark Pitchless
+
+This program is free software; you can redistribute it and/or modify it
+under the terms of either: the GNU General Public License as published
+by the Free Software Foundation; or the Artistic License.
+
+See http://dev.perl.org/licenses/ for more information.
+
