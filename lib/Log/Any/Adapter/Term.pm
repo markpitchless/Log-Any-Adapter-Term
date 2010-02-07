@@ -28,11 +28,14 @@ our %LEVEL_COLOR = (
     emergency => ['red'],
 );
 
+# Set everything up. No API for changing settings so can pre calc eveything
 sub init {
     my ($self) = @_;
 
-    $self->{level} ||= 'info';
-    $self->{use_color} = (-t STDOUT ? 1 : 0) if not defined $self->{use_color};
+    $self->{level}  ||= 'info';
+    $self->{stdout} ||= 0;
+    my $fh = $self->{_fh} ||= $self->{stdout} ? \*STDOUT : \*STDERR;
+    $self->{use_color}     = (-t $fh ? 1 : 0) if not defined $self->{use_color};
 
     confess 'must supply a valid level'
         unless exists $LOG_LEVEL{ $self->{level} };
@@ -48,12 +51,14 @@ foreach my $method ( Log::Any->logging_methods() ) {
     make_method( $method, sub {
         my ($self,$msg) = @_;
         return unless $self->$is_level;
+
         my $color = $self->{use_color} && $LEVEL_COLOR{$method};
+        my $fh    = $self->{_fh};
         if ( $color ) {
-            print colored $color, "$level\: $msg", "\n";
+            print $fh colored( $color, "$level\: $msg" ), "\n";
         }
         else {
-            print "$level\: $msg", "\n";
+            print $fh "$level\: $msg", "\n";
         }
     });
 }
@@ -99,15 +104,15 @@ This L<Log::Any|Log::Any> adapter logs to the screen, for use with a command
 line app. There is a single required parameter, I<level>, which is the minimum
 level to log at.
 
-Currently logs to STDOUT. If it is connected to a tty then the default is to
-log in colour, otherwise no colour (so the logs wont be full of esc chars if
-redirected to a file). Colours used are based on the log level. Control with
-the use_color option.
+Default logs to STDERR, pass C<stdout> option to go to STDOUT. If it is
+connected to a tty then the default is to log in colour, otherwise no colour
+(so the logs wont be full of esc chars if redirected to a file). Colours used
+are based on the log level. Control with the use_color option.
 
-The is no formal mechanism for changing the colours used at the moment. They
+There is no formal mechanism for changing the colours used at the moment. They
 are stored in C<%Log::Ang::Adapter::Term::LEVEL_COLOR>, with a key of log level
-and a value of an array ref of color names to give to L<Term::ANSIColor>. This
-may change in a future version.
+and a value of an array ref of color names to give to L<Term::ANSIColor>. So
+just hack that to change the colors. This may change in a future version.
 
 =head1 OPTIONS
 
@@ -121,6 +126,10 @@ The minimum log level name to log at. e.g. 'error'.
 
 Whether to color the log output based on the level. Default will test to see if
 we are connected to a tty and use color if we are, no color otherwise.
+
+=head2 stdout
+
+Set to true to log to STDOUT instead of the default of STDERR.
 
 =head1 ENVIRONMENT
 
@@ -144,8 +153,6 @@ the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Log-Any-Ad
 automatically be notified of progress on your bug as I make changes.
 
 =head1 TODO
-
-Option to to control file handle used, STDOUT, STDERR etc.
 
 Decide on a proper interface for setting the colours to use. Probably just pass
 a hash to the constructor.
