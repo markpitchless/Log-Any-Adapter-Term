@@ -7,6 +7,11 @@ my $builder = Module::Build->new(
     license             => 'perl',
     dist_author         => q{Mark Pitchless <markpitchless@gmail.com>},
     dist_version_from   => 'lib/Log/Any/Adapter/Term.pm',
+    requires => {
+        'Log::Any'          => 0.06,
+        'Log::Any::Adapter' => 0.02,
+        'Term::ANSIColor'   => 0,
+    },
     build_requires => {
         'Test::More' => 0,
     },
