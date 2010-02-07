@@ -1,7 +1,13 @@
-Log-Any-Adapter-Term
 
-Adapter for Log::Any that logs to the terminal. Includes color output for
-interactive terminals.
+==========================
+=  Log-Any-Adapter-Term  =
+==========================
+
+VERSION:  0.01
+RELEASED: 8th Feb 2010
+
+Adapter for perl module Log::Any that logs to the terminal. Includes color
+output for interactive terminals.
 
 Early days, but functional and colourful. Been using for a while as part of
 another project, pulling out to seperate module in preparation for a CPAN
@@ -36,6 +42,10 @@ After installing, you can find documentation for this module with the
 perldoc command.
 
  perldoc Log::Any::Adapter::Term.
+
+The source code is hosted on github:
+
+ http://github.com/markpitchless/Log-Any-Adapter-Term/
 
 
 COPYRIGHT AND LICENCE
