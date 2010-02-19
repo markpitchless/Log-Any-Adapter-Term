@@ -65,6 +65,7 @@ foreach my $method ( Log::Any->logging_methods() ) {
         my $fh    = $self->{_fh};
         $msg      = $self->_format_msg( $msg, $level );
         if ( $color ) {
+            # Keep \n seperate to avoid term confusion with bg colors.
             print $fh colored( $color, $msg ), "\n";
         }
         else {
@@ -102,12 +103,16 @@ Version 0.02
 
     use Log::Any qw($log);
     use Log::Any::Adapter;
-    Log::Any::Adapter->set( 'Term', level => 'info' );
+    Log::Any::Adapter->set( 'Term', level => 'debug' );
 
-    $log->info("Hello");
+    $log->debug("Hello world");
+    $log->info("Starting");
     $log->notice("Lots happening");
     $log->warning("Looking dodgey");
     $log->error("Bang!");
+    $log->critical("Out of widgets");
+    $log->alert("Please send help");
+    $log->emergency("Their dead Dave");
 
 =head1 DESCRIPTION
 
