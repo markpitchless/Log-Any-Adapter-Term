@@ -1,10 +1,16 @@
 Revision history for Log-Any-Adapter-Term
 
+v0.03   master - unreleased
+
+        * Change to default output colors.
+        * Added a test case for basic logging.
+
+
 v0.02   8th Feb 2010
 
         * Added stdout option, with default to stderr.
 
 
 v0.01   8th Feb 2010
-        First version, released on an unsuspecting world (github).
 
+        First version, released on an unsuspecting world (github).
