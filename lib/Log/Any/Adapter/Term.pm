@@ -18,14 +18,14 @@ our %LOG_LEVEL;
 $Term::ANSIColor::EACHLINE = "\n";
 
 our %LEVEL_COLOR = (
-    #debug     => ['blue'],
+    debug     => ['blue'],
     info      => ['green'],
-    notice    => ['magenta'],
+    notice    => ['green'],
     warning   => ['yellow'],
     error     => ['red'],
-    critical  => ['red'],
-    alert     => ['red'],
-    emergency => ['red'],
+    critical  => ['bold red'],
+    alert     => ['bold red'],
+    emergency => ['bold red'],
 );
 
 # Set everything up. No API for changing settings so can pre calc eveything.
@@ -45,6 +45,12 @@ sub init {
     $self->{level_num} = $LOG_LEVEL{ $self->{level} };
 }
 
+sub _format_msg {
+    my $self = shift;
+    my ($msg,$level) = @_;
+    sprintf "%-8s $msg", "$level\:";
+}
+
 # Log to the screen, checking is_$level
 #
 foreach my $method ( Log::Any->logging_methods() ) {
@@ -57,11 +63,12 @@ foreach my $method ( Log::Any->logging_methods() ) {
 
         my $color = $self->{use_color} && $LEVEL_COLOR{$method};
         my $fh    = $self->{_fh};
+        $msg      = $self->_format_msg( $msg, $level );
         if ( $color ) {
-            print $fh colored( $color, "$level\: $msg" ), "\n";
+            print $fh colored( $color, $msg ), "\n";
         }
         else {
-            print $fh "$level\: $msg", "\n";
+            print $fh $msg, "\n";
         }
     });
 }
