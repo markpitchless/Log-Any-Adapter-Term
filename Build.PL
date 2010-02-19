@@ -13,9 +13,10 @@ my $builder = Module::Build->new(
         'Term::ANSIColor'   => 0,
     },
     build_requires => {
-        'Test::More' => 0,
+        'Test::More'   => 0,
+        'Test::Output' => 0.16,
     },
-    add_to_cleanup      => [ 'Log-Any-Adapter-Term-*' ],
+    add_to_cleanup     => [ 'Log-Any-Adapter-Term-*' ],
     create_makefile_pl => 'traditional',
 );
 
