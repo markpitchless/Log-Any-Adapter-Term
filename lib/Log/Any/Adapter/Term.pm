@@ -28,14 +28,16 @@ our %LEVEL_COLOR = (
     emergency => ['red'],
 );
 
-# Set everything up. No API for changing settings so can pre calc eveything
+# Set everything up. No API for changing settings so can pre calc eveything.
+# Note the inherited new will have already stuffed the args into the $self hash.
 sub init {
     my ($self) = @_;
 
     $self->{level}  ||= 'info';
     $self->{stdout} ||= 0;
+
     my $fh = $self->{_fh} ||= $self->{stdout} ? \*STDOUT : \*STDERR;
-    $self->{use_color}     = (-t $fh ? 1 : 0) if not defined $self->{use_color};
+    $self->{use_color}      = (-t $fh ? 1 : 0) if not defined $self->{use_color};
 
     confess 'must supply a valid level'
         unless exists $LOG_LEVEL{ $self->{level} };
@@ -46,8 +48,9 @@ sub init {
 # Log to the screen, checking is_$level
 #
 foreach my $method ( Log::Any->logging_methods() ) {
-    my $level = ucfirst $method;
+    my $level    = ucfirst $method;
     my $is_level = "is_$method";
+
     make_method( $method, sub {
         my ($self,$msg) = @_;
         return unless $self->$is_level;
@@ -67,6 +70,7 @@ foreach my $method ( Log::Any->logging_methods() ) {
 #
 foreach my $method ( Log::Any->detection_methods() ) {
     my $level = substr( $method, 3 );
+
     make_method( $method, sub {
         my $self = shift;
         return $LOG_LEVEL{ $level } >= $self->{level_num} ? 1 : 0;
@@ -81,7 +85,7 @@ __END__
 
 =head1 NAME
 
-Log::Any::Adapter::Term - A Log::Any screen logger.
+Log::Any::Adapter::Term - A Log::Any terminal logger.
 
 =head1 VERSION
 
@@ -90,8 +94,8 @@ Version 0.02
 =head1 SYNOPSIS
 
     use Log::Any qw($log);
-    use Log::Any::Adapter::Term;
-    Log::Any->set_adapter( 'Term', level => 'info' );
+    use Log::Any::Adapter;
+    Log::Any::Adapter->set( 'Term', level => 'info' );
 
     $log->info("Hello");
     $log->notice("Lots happening");
@@ -100,19 +104,22 @@ Version 0.02
 
 =head1 DESCRIPTION
 
-This L<Log::Any|Log::Any> adapter logs to the screen, for use with a command
-line app. There is a single required parameter, I<level>, which is the minimum
-level to log at.
+This L<Log::Any|Log::Any> adapter logs to the terminal screen, for use with
+command line apps.
 
-Default logs to STDERR, pass C<stdout> option to go to STDOUT. If it is
+Default logs to STDERR, pass L</stdout> option to go to STDOUT. If it is
 connected to a tty then the default is to log in colour, otherwise no colour
 (so the logs wont be full of esc chars if redirected to a file). Colours used
-are based on the log level. Control with the use_color option.
+are based on the log level. Control with the L</use_color> option.
+
+Default log level is info, change with the L</level> option.
+
+=head2 Changing colors
 
 There is no formal mechanism for changing the colours used at the moment. They
 are stored in C<%Log::Ang::Adapter::Term::LEVEL_COLOR>, with a key of log level
 and a value of an array ref of color names to give to L<Term::ANSIColor>. So
-just hack that to change the colors. This may change in a future version.
+just hack that to change the colors. This may well change in a future version.
 
 =head1 OPTIONS
 
@@ -120,7 +127,7 @@ The following options can be passed into the C<set_adapter> call.
 
 =head2 level
 
-The minimum log level name to log at. e.g. 'error'.
+The minimum log level name to log at. e.g. 'error'. Default is 'info'.
 
 =head2 use_color
 
@@ -141,24 +148,32 @@ Set to a true value to disable coloring of log output.
 
 =back
 
+=head1 BUGS
+
+Please report any bugs or feature requests to C<bug-log-any-adapter-term at
+rt.cpan.org>, or through the web interface at
+L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Log-Any-Adapter-Term>.  I will
+be notified, and then you'll automatically be notified of progress on your bug
+as I make changes.
+
 =head1 SEE ALSO
 
 L<Log::Any|Log::Any>, L<Log::Any::Adapter|Log::Any::Adapter>,
 L<Term::ANSIColor>.
 
-=head1 BUGS
-
-Please report any bugs or feature requests to C<bug-log-any-adapter-term at rt.cpan.org>, or through
-the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Log-Any-Adapter-Term>.  I will be notified, and then you'll
-automatically be notified of progress on your bug as I make changes.
-
 =head1 TODO
 
-Decide on a proper interface for setting the colours to use. Probably just pass
+Decide on a proper interface for setting the colours to use. Maybe just pass
 a hash to the constructor.
 
 Finer grained (than just the level) highlightling system. More like colorize
 and ccze.
+
+=head1 AUTHOR
+
+Mark Pitchless, C<< <markpitchless at gmail.com> >>
+
+=head1 ACKNOWLEDGEMENTS
 
 =head1 SUPPORT
 
@@ -166,6 +181,9 @@ You can find documentation for this module with the perldoc command.
 
     perldoc Log::Any::Adapter::Term
 
+The source code is hosted on github:
+
+    http://github.com/markpitchless/Log-Any-Adapter-Term
 
 You can also look for information at:
 
@@ -188,12 +206,6 @@ L<http://cpanratings.perl.org/d/Log-Any-Adapter-Term>
 L<http://search.cpan.org/dist/Log-Any-Adapter-Term/>
 
 =back
-
-=head1 AUTHOR
-
-Mark Pitchless, C<< <markpitchless at gmail.com> >>
-
-=head1 ACKNOWLEDGEMENTS
 
 =head1 COPYRIGHT & LICENSE
 
