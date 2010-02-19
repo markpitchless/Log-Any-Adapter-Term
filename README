@@ -3,11 +3,14 @@
 =  Log-Any-Adapter-Term  =
 ==========================
 
-VERSION:  0.02
-RELEASED: 8th Feb 2010
+VERSION:  0.03
+RELEASED:  
 
 Adapter for perl module Log::Any that logs to the terminal. Includes color
 output for interactive terminals.
+
+
+STATUS
 
 Early days, but functional and colourful. Been using for a while as part of
 another project, pulling out to seperate module in preparation for a CPAN
