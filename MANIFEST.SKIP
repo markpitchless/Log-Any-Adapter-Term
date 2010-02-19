@@ -1,0 +1,7 @@
+^MYMETA.yml$
+^.git/
+^_build/
+^Build$
+^blib/
+\.swp$
+^MANIFEST.bak$

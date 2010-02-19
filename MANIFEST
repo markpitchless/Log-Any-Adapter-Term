@@ -1,8 +1,14 @@
+.gitignore
 Build.PL
 Changes
-MANIFEST
-README
+examples/synopsis.pl
 lib/Log/Any/Adapter/Term.pm
+Makefile.PL
+MANIFEST
+MANIFEST.SKIP
+META.yml
+README
 t/00-load.t
+t/basic.t
 t/pod-coverage.t
 t/pod.t
