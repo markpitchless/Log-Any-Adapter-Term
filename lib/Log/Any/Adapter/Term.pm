@@ -135,7 +135,7 @@ just hack that to change the colors. This may well change in a future version.
 
 =head1 OPTIONS
 
-The following options can be passed into the C<set_adapter> call.
+The following options can be passed into the C<Log::Any::Adapter->set> call.
 
 =head2 level
 
