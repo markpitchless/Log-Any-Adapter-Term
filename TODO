@@ -1,0 +1,16 @@
+
+Decide on a proper interface for setting the colours to use. Maybe just pass
+a hash to the constructor.
+
+Finer grained (than just the level) highlightling system. More like colorize
+and ccze.
+
+Category include and exclude filters for what to log.
+
+Message formatting. Keep it simple put powerful by usng a sub as the formatter.
+
+ formatter => sub {
+    my $time = localtime;
+    "$0 ($$) [$time] $level: $category - $msg";
+ }
+
