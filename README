@@ -4,7 +4,7 @@
 ==========================
 
 VERSION:  0.03
-RELEASED:  
+RELEASED: 20th Feb 2010
 
 Adapter for perl module Log::Any that logs to the terminal. Includes color
 output for interactive terminals.

@@ -6,7 +6,7 @@ use Log::Any::Adapter::Util qw(make_method);
 use Term::ANSIColor;
 use base qw(Log::Any::Adapter::Base);
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 our %LOG_LEVEL;
 {
@@ -97,7 +97,7 @@ Log::Any::Adapter::Term - A Log::Any terminal logger.
 
 =head1 VERSION
 
-Version 0.02
+Version 0.03
 
 =head1 SYNOPSIS
 

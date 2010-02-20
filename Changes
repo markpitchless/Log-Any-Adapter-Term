@@ -1,9 +1,10 @@
 Revision history for Log-Any-Adapter-Term
 
-v0.03   master - unreleased
+v0.03   20th Feb 2010
 
         * Change to default output colors.
         * Added a test case for basic logging.
+        * Cleanup internals and docs.
 
 
 v0.02   8th Feb 2010
