@@ -162,24 +162,14 @@ Set to a true value to disable coloring of log output.
 
 =head1 BUGS
 
-Please report any bugs or feature requests to C<bug-log-any-adapter-term at
-rt.cpan.org>, or through the web interface at
-L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Log-Any-Adapter-Term>.  I will
-be notified, and then you'll automatically be notified of progress on your bug
-as I make changes.
+Please log bugs and feature requests on the github page:
+
+ http://github.com/markpitchless/Log-Any-Adapter-Term/issues
 
 =head1 SEE ALSO
 
 L<Log::Any|Log::Any>, L<Log::Any::Adapter|Log::Any::Adapter>,
 L<Term::ANSIColor>.
-
-=head1 TODO
-
-Decide on a proper interface for setting the colours to use. Maybe just pass
-a hash to the constructor.
-
-Finer grained (than just the level) highlightling system. More like colorize
-and ccze.
 
 =head1 AUTHOR
 
@@ -196,28 +186,6 @@ You can find documentation for this module with the perldoc command.
 The source code is hosted on github:
 
     http://github.com/markpitchless/Log-Any-Adapter-Term
-
-You can also look for information at:
-
-=over 4
-
-=item * RT: CPAN's request tracker
-
-L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=Log-Any-Adapter-Term>
-
-=item * AnnoCPAN: Annotated CPAN documentation
-
-L<http://annocpan.org/dist/Log-Any-Adapter-Term>
-
-=item * CPAN Ratings
-
-L<http://cpanratings.perl.org/d/Log-Any-Adapter-Term>
-
-=item * Search CPAN
-
-L<http://search.cpan.org/dist/Log-Any-Adapter-Term/>
-
-=back
 
 =head1 COPYRIGHT & LICENSE
 
